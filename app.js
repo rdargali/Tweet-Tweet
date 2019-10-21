@@ -26,14 +26,10 @@ app.set("view engine", "pug");
 
 app.get("/", (req, res) => {
   
-  res.render("index");
-  const {userID} = req.session
-  console.log(userID)
 });
 
 app.get("/login", (req, res) => {
   res.render('login');
-  //req.session.userID
 });
 
 app.get("/account", (req, res) => {
@@ -48,25 +44,6 @@ app.get("/register", (req, res) => {
 
 
 
-app.get("/register", (req, res) => {
-    res.render('register');
-});
-
-
-
-app.post("/login", (req, res) => {
-  res.render('login');
-  
-});
-
-
-app.post("/register", (req, res) => {
-  res.render('register');
-});
-
-app.post("/logout", (req, res) => {
-  res.render('register');
-});
 
 
 
