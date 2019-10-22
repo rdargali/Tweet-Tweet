@@ -5,6 +5,13 @@ const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const accountRouter = require('./routes/accounts');
 
+const users = [
+  {id: 1, name: 'Rawand', email: 'rawand@gmail.com', password: 'password'},
+  {id: 2, name: 'Huy', email: 'huy@gmail.com', password: 'password'},
+  {id: 3, name: 'Steven', email: 'steven@gmail.com', password: 'password'},
+  {id: 4, name: 'Angelo', email: 'angelo@gmail.com', password: 'password'}
+]
+
 app.use(
   session({
     secret: "the new twitter",
@@ -18,7 +25,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.set("view engine", "pug");
 
 app.get("/", (req, res) => {
-  res.render("index");
+  
 });
 
 app.get("/login", (req, res) => {
@@ -27,7 +34,7 @@ app.get("/login", (req, res) => {
 
 
 app.get("/register", (req, res) => {
-    res.render('register');
+  res.render('register');
 });
 
 app.post("/users", (req, res)=>{
@@ -38,6 +45,9 @@ app.post("/login", function(req, res) {
   console.log(req.body);
   res.redirect("/login");
 });
+
+
+
 
 
 app.listen(3000)
