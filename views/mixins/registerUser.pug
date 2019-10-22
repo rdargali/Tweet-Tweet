@@ -1,0 +1,12 @@
+mixin registerUser()
+    h1 Create your account
+    hr
+    form(method="POST" action="/users")
+        .form-group
+            label(for='email') Email address
+            input#email.form-control(name="email" type="email" aria-describedby='emailHelp' placeholder='Enter email')   
+        .form-group
+            label(for='password') Password
+            input#password.form-control(name="password" type='password' placeholder='Enter password')
+        button.btn.btn-primary(type='submit') Register  
+          
