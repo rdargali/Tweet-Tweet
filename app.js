@@ -4,13 +4,8 @@ const session = require('express-session');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const accountRouter = require('./routes/accounts');
-
-const users = [
-  {id: 1, name: 'Rawand', email: 'rawand@gmail.com', password: 'password'},
-  {id: 2, name: 'Huy', email: 'huy@gmail.com', password: 'password'},
-  {id: 3, name: 'Steven', email: 'steven@gmail.com', password: 'password'},
-  {id: 4, name: 'Angelo', email: 'angelo@gmail.com', password: 'password'}
-]
+const db = require('./models')
+const saltRounds = 10;
 
 app.use(
   session({
@@ -29,7 +24,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-  res.render('login');
+  res.render('index');
 });
 
 app.post('/login'), (req, res) => {
@@ -61,7 +56,19 @@ app.post("/login", function(req, res) {
   res.redirect("/login");
 });
 
-
+app.post('/users', function (req, res) {
+  bcrypt.hash(req.body, saltRounds, function (err, hash) {
+ db.User.create({
+   email: req.body.email,
+   password: hash
+   }).then(function(data) {
+    console.log('heyyyy')
+    if (data) {
+    res.redirect('/index');
+    }
+  });
+ });
+});
 
 
 app.listen(3000)
