@@ -38,8 +38,8 @@ a{
 .form_inline {
   border: 0;
   display: flex;
-  justify-content: flex-start;
-  padding: 50px;
+  justify-content: flex-end;
+  padding: 30px;
 }
 
 .footer{
@@ -51,4 +51,8 @@ a{
   height:700px;
   padding: 150px;
   
+}
+#logo{
+  display: flex;
+  justify-content: left;
 }

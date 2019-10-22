@@ -22,7 +22,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-    res.render('login');
+    res.render('index');
 });
 
 
@@ -30,8 +30,14 @@ app.get("/register", (req, res) => {
     res.render('register');
 });
 
-
-
+app.post("/users", (req, res)=>{
+  // Once user is registered redirect user back to login page with message saying user registered successfully
+  res.render('index')
+});
+app.post("/login", function(req, res) {
+  console.log(req.body);
+  res.redirect("/login");
+});
 
 
 app.listen(3000)
