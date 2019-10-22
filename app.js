@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-  res.render('login');
+  res.render('index');
 });
 
 app.post('/login'), (req, res) => {
