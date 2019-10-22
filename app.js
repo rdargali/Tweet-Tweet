@@ -1,12 +1,12 @@
+const Sequelize =require ('sequelize');
 const express = require('express');
 const app = express();
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const accountRouter = require('./routes/accounts');
-const db = require('./models')
 const saltRounds = 10;
-
+const db = require('./models')
 app.use(
   session({
     secret: "the new twitter",
@@ -14,6 +14,7 @@ app.use(
     saveUninitialized: true
   })
 );
+
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -46,10 +47,10 @@ app.get("/register", (req, res) => {
   res.render('register');
 });
 
-app.post("/users", (req, res)=>{
-  // Once user is registered redirect user back to login page with message saying user registered successfully
-  res.render('index')
-});
+// app.post("/users", (req, res)=>{
+//   // Once user is registered redirect user back to login page with message saying user registered successfully
+//   res.render('index')
+// });
 
 app.post("/login", function(req, res) {
   console.log(req.body);
@@ -57,19 +58,20 @@ app.post("/login", function(req, res) {
 });
 
 app.post('/users', function (req, res) {
-  bcrypt.hash(req.body, saltRounds, function (err, hash) {
- db.User.create({
-   email: req.body.email,
-   password: hash
-   }).then(function(data) {
-    console.log('heyyyy')
-    if (data) {
-    res.redirect('/index');
+  console.log("does this even run?")
+  db.Users.create({
+    email: req.body.email,
+    password: req.body.password
+  }).then(function (users){;
+    if(users){
+      console.log("i guess it worked?")
+      Response.send(users);
+    }else{
+      console.log("there was an issue")
+      Response.status(400).send('Error in insert new record');
     }
-  });
- });
 });
-
+});
 
 app.listen(3000)
 
