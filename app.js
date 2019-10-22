@@ -32,6 +32,14 @@ app.get("/login", (req, res) => {
   res.render('login');
 });
 
+app.post('/login'), (req, res) => {
+  req.body.email = activeUSer
+  req.body.password = pass
+
+  req.session.user = activeUser
+}
+
+
 app.get("/account", (req, res) => {
   res.render('account');
   
