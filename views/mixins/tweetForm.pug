@@ -1,0 +1,9 @@
+mixin tweetForm()
+        form.tweet_post(action='/tweet' method='POST')
+            .tweet_avatar
+                //- user profile pix
+                img(src='/images/icon.jpg')
+            .tweet_textbox
+                textarea(name='tweet' class='tweet_textarea' placeholder='Enter your text')
+                .tweet_button
+                    input(type='submit' class='button tweet_button' value="Tweet")

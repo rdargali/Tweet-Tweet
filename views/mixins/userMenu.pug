@@ -1,0 +1,9 @@
+mixin userMenu()
+    .dropdown
+        .dropbtn
+                a(href='/') Home
+                a(href=`/${user.username}`) My Profile
+                a(href='/account') Settings
+                a(href='/logout') Logout
+
+//- Also need a way to link profile picture for each user and name
