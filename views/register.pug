@@ -1,17 +1,5 @@
 extends layout
-
-block content 
-    include includes/header
-    .single_wrap
-        h1 Create a New Account
-        form.form(action='/register' method='POST')
-            
-            label(for='username') Choose a Username:
-            input(type='text' name='username' )
-            label(for='email') Enter your email:
-            input(type='email' name='email')
-            label(for='password') Set a password:
-            input(type='password' name='password' )
-            label(for='password-confirm') Re-enter your password:
-            input(type='password' name='password-confirm' )
-            input(type='submit' class='button' value='Create Account')
+include mixins/registerUser
+block content
+        .single_wrap
+            +registerUser()

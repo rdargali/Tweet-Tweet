@@ -1,13 +1,31 @@
+include mixins/loginForm
+include mixins/userMenu
 doctype html
 head
   meta(charset='UTF-8')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
   meta(http-equiv='X-UA-Compatible' content='ie=edge')
-  title Twitter Clone
+  title TweetTweet
   link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous')
-  link(rel='stylesheet' href='public/styles.css')
-  block head
+  link(rel='stylesheet' href='/styles/layout.css')
 body
-  block content
-    h2 Some Text
+  .header
+    .wrapper
+            #logo
+                h1.site_logo
+                  a(href="/")
+                    img(src="/images/tweet.png")
+
+            #navigation
+                if user
+                  //- show user menu
+                  +userMenu()
+                else
+                  //- Show login form
+                  +loginForm()
+                  
+  .content_area
+            block content
+  .footer
+    p &copy TweetTweet 2019
   script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js' integrity='sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM' crossorigin='anonymous')

@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.set("view engine", "pug");
 
 app.get("/", (req, res) => {
-  
+  res.render('index')
 });
 
 app.get("/login", (req, res) => {
@@ -50,9 +50,14 @@ app.get("/register", (req, res) => {
   res.render('register');
 });
 
-
-
-
+app.post("/users", (req, res)=>{
+  // Once user is registered redirect user back to login page with message saying user registered successfully
+  res.render('index')
+});
+app.post("/login", function(req, res) {
+  console.log(req.body);
+  res.redirect("/login");
+});
 
 
 
