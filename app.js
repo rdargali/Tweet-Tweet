@@ -5,12 +5,7 @@ const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const accountRouter = require('./routes/accounts');
 
-const users = [
-  {id: 1, name: 'Rawand', email: 'rawand@gmail.com', password: 'password'},
-  {id: 2, name: 'Huy', email: 'huy@gmail.com', password: 'password'},
-  {id: 3, name: 'Steven', email: 'steven@gmail.com', password: 'password'},
-  {id: 4, name: 'Angelo', email: 'angelo@gmail.com', password: 'password'}
-]
+const PORT = process.env.port || 3000;
 
 app.use(
   session({
@@ -37,8 +32,9 @@ app.post('/login'), (req, res) => {
   req.body.password = pass
 
   req.session.user = activeUser
+  console.log(`The email ${req.body.email} is active`)
   res.render('/account')
-}
+};
 
 
 app.get("/account", (req, res) => {
@@ -64,6 +60,6 @@ app.post("/login", function(req, res) {
 
 
 
-app.listen(3000)
+app.listen(PORT, console.log('Server is running'));
 
 
