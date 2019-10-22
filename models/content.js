@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     posting: DataTypes.STRING
   }, {});
   content.associate = function(models) {
-    // associations can be defined here
+    Content.belongsTo(model.Users);
   };
   return content;
 };
