@@ -56,3 +56,7 @@ a{
   display: flex;
   justify-content: left;
 }
+.logout{
+  margin-left:50px;
+  text-align: center;
+}
