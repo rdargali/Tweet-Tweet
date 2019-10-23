@@ -19,6 +19,7 @@ body{
 a{
   color: black;
 }
+
 .wrapper{
   max-width: 1000px;
   margin: 0 auto;
@@ -44,6 +45,7 @@ a{
 
 .footer{
   text-align: center;
+  bottom: 0v;
 }
 .single_wrap{
   background-color: whitesmoke;

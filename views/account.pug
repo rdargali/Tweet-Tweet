@@ -1,8 +1,24 @@
 extends layout
 include mixins/tweetForm
+<<<<<<< HEAD
 block content 
     .profile_container
      
         .user_profile
             h2 Your user profile
                 
+=======
+
+block content 
+    Head
+        .profile_container
+                h2 Your user profile
+append content
+    body
+        .tweet_form
+            form.tweet_post(action='/tweet' method='POST')
+            .tweet_textbox
+                textarea(name='tweet' rows='5' cols='40' class='tweet_textarea' placeholder='Tweet tweet')
+                .tweet_button
+                    input(type='submit' class='button tweet_button'  value="Tweet Tweet")
+>>>>>>> master
