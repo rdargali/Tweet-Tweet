@@ -70,7 +70,8 @@ app.post("/login", loginRedirect, function(req, res) {
           req.session.userId = user.id
           res.redirect('/account');
         } else{
-          throw new Error ("Invalid username or password")
+           return res.status(500).send('Invalid username or password');
+       
         }
       });
     }
