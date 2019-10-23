@@ -9,11 +9,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@okta/oidc-middleware": "^2.0.0",
     "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
+    "njwt": "^1.0.0",
+    "nnode": "^0.3.3",
     "pg": "^7.12.1",
     "pug": "^2.0.4",
     "sequelize": "^5.21.1"

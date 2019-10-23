@@ -7,6 +7,8 @@ const bodyParser = require('body-parser');
 const accountRouter = require('./routes/accounts');
 const saltRounds = 10;
 const db = require('./models')
+
+
 app.use(
   session({
     secret: "the new twitter",
@@ -47,30 +49,39 @@ app.get("/register", (req, res) => {
   res.render('register');
 });
 
-// app.post("/users", (req, res)=>{
-//   // Once user is registered redirect user back to login page with message saying user registered successfully
-//   res.render('index')
-// });
-
 app.post("/login", function(req, res) {
-  console.log(req.body);
-  res.redirect("/login");
+  db.Users.findOne({
+    where:{
+      email: req.body.email
+    }
+  }).then(function(user){
+    if (!user){
+      res.redirect('/')
+    } else{
+      bcrypt.compare(req.body.password, user.password, function(err, result){
+        if (result == true){
+          res.redirect('/account');
+        } else{
+          res.send("Invalid password");
+          res.redirect('/')
+        }
+      });
+    }
+  });
+
 });
 
-app.post('/users', function (req, res) {
-  console.log("does this even run?")
-  db.Users.create({
-    email: req.body.email,
-    password: req.body.password
-  }).then(function (users){;
-    if(users){
-      console.log("i guess it worked?")
-      Response.send(users);
-    }else{
-      console.log("there was an issue")
-      Response.status(400).send('Error in insert new record');
-    }
-});
+app.post('/users', async (req, res)=>{
+  bcrypt.hash(req.body.password, saltRounds, function (err, hash){
+    db.Users.create({
+      email: req.body.email,
+      password: hash
+    }).then(function(data){
+      if (data){
+        res.redirect('/');
+      }
+    });
+  });
 });
 
 app.listen(3000)
