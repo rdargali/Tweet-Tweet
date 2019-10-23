@@ -8,7 +8,6 @@ module.exports = (sequelize, DataTypes) => {
     profile_pic: DataTypes.STRING
   }, {});
   Users.associate = function(models) {
-
   };
   return Users;
 };
