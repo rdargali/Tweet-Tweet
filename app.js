@@ -16,62 +16,87 @@ app.use(
     saveUninitialized: true
   })
 );
-
+function loginRedirect(req, res, next){
+  console.log(',.,.,.,.,.,.,.,.,.')
+  if (req.session.userId){
+    console.log("<<<<<<<<<<")
+    res.redirect("/account")
+  }else{
+    next();
+  }
+}
+function authenticate (req, res, next){
+  if (!req.session.userId){
+    console.log(">>>>>>>>>>")
+    res.redirect("/")
+  } else{
+    next();
+  }
+}
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.set("view engine", "pug");
 
 app.get("/", (req, res) => {
-  res.render('index')
+  let data = {};
+  console.log(">>>>>>>>>>>")
+  data=db.content.findAll();
+  console.log(data.posting)
+  res.render("index", data);
 });
 
-app.get("/login", (req, res) => {
-  res.render('index');
+app.get("/login", loginRedirect, (req, res) => {
+  res.render('/');
 });
 
 
-app.get("/account", (req, res) => {
+app.get("/account", authenticate, (req, res) => {
+  console.log(">>>>>>>>>>")
   res.render('account');
-  
+  console.log("<<<<<<<<")
 });
 
-app.get("/register", (req, res) => {
+app.get("/register", loginRedirect, (req, res) => {
   res.render('register');
 });
 
-app.post("/login", function(req, res) {
+app.post("/login", loginRedirect, function(req, res) {
   db.Users.findOne({
     where:{
       email: req.body.email
     }
   }).then(function(user){
     if (!user){
-      res.redirect('/')
+    res.redirect('/')
     } else{
       bcrypt.compare(req.body.password, user.password, function(err, result){
-        if (result == true){
+        if (result){
+          req.session.userId = user.id
           res.redirect('/account');
         } else{
-          res.send("Invalid password");
-          res.redirect('/')
+           return res.status(500).send('Invalid username or password');
+       
         }
       });
     }
   });
 
 });
-app.post('/tweets', async (req, res)=>{
-  try{
-      req.body.author = req.user.id;
-      const tweet = new tweet(req.body);
-      await tweet.save();
-      res.redirect('/')
-  } catch(e){
-    console.log(e)
-    res.send("Error please try again")
-  }
+app.get('/tweet', (req, res)=>{
+  db.contents.find({}, (err, posting) =>{
+    console.log(">>>>>")
+    res.send("/", posting)
+  })
 })
+app.post('/tweet', (req, res)=>{
+ 
+  db.contents.create({
+    posting: res.body
+  }).then()
+ 
+})
+
 app.post('/users', async (req, res)=>{
   bcrypt.hash(req.body.password, saltRounds, function (err, hash){
     db.Users.create({
@@ -85,6 +110,10 @@ app.post('/users', async (req, res)=>{
   });
 });
 
+app.get("/logout", function(req, res) {
+  req.session.destroy();
+  res.redirect("/");
+});
 app.listen(3000)
 
 

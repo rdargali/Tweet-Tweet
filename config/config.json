@@ -4,23 +4,17 @@
     "password": "cWgCI1evao3GTdChTOdGg--oMKXrEs3x",
     "database": "jryulqlv",
     "host": "salt.db.elephantsql.com",
-    "dialect": "postgres"
-    
-  },
+    "dialect": "postgres"  },
   "test": {
     "username": "jryulqlv",
     "password": "cWgCI1evao3GTdChTOdGg--oMKXrEs3x",
     "database": "jryulqlv",
     "host": "postgres://jryulqlv:cWgCI1...@salt.db.elephantsql.com:5432/jryulqlv",
-    "dialect": "postgres"
-    
-  },
+    "dialect": "postgres"  },
   "production": {
     "username": "jryulqlv",
     "password": "cWgCI1evao3GTdChTOdGg--oMKXrEs3x",
     "database": "jryulqlv",
     "host": "postgres://jryulqlv:cWgCI1...@salt.db.elephantsql.com:5432/jryulqlv",
-    "dialect": "postgres"
-    
-  }
-}
+    "dialect": "postgres"  }
+ }

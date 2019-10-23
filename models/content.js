@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     posting: DataTypes.STRING
   }, {});
   content.associate = function(models) {
+    
   };
   return content;
 };
