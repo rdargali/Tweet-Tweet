@@ -30,20 +30,11 @@ app.get("/login", (req, res) => {
   res.render('index');
 });
 
-app.post('/login'), (req, res) => {
-  req.body.email = activeUSer
-  req.body.password = pass
-
-  req.session.user = activeUser
-  res.render('/account')
-}
-
 
 app.get("/account", (req, res) => {
   res.render('account');
   
 });
-
 
 app.get("/register", (req, res) => {
   res.render('register');
@@ -70,7 +61,17 @@ app.post("/login", function(req, res) {
   });
 
 });
-
+app.post('/tweets', async (req, res)=>{
+  try{
+      req.body.author = req.user.id;
+      const tweet = new tweet(req.body);
+      await tweet.save();
+      res.redirect('/')
+  } catch(e){
+    console.log(e)
+    res.send("Error please try again")
+  }
+})
 app.post('/users', async (req, res)=>{
   bcrypt.hash(req.body.password, saltRounds, function (err, hash){
     db.Users.create({
