@@ -36,8 +36,7 @@ app.post('/login'), (req, res) => {
 
   req.session.user = activeUser
   res.render('/account')
-}
-
+};
 
 app.get("/account", (req, res) => {
   res.render('account');
@@ -62,8 +61,8 @@ app.post("/login", function(req, res) {
         if (result == true){
           res.redirect('/account');
         } else{
-          res.send("Invalid password");
-          res.redirect('/')
+          //res.send("Invalid password");
+          res.redirect(400, '/')
         }
       });
     }
