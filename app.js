@@ -78,17 +78,20 @@ app.post("/login", loginRedirect, function(req, res) {
   });
 
 });
-app.post('/tweets', async (req, res)=>{
-  try{
-      req.body.author = req.user.id;
-      const tweet = new tweet(req.body);
-      await tweet.save();
-      res.redirect('/')
-  } catch(e){
-    console.log(e)
-    res.send("Error please try again")
-  }
+app.get('/tweet', (req, res)=>{
+  db.Contents.find({}, (err, messages) =>{
+    res.send(messages)
+  })
 })
+app.post('/tweet', (req, res)=>{
+  const message = new Contents(req.body);
+  message.save((err)=>{
+    if(err)
+    sendStatus(500);
+    res.sendStatus(200)
+  })
+})
+
 app.post('/users', async (req, res)=>{
   bcrypt.hash(req.body.password, saltRounds, function (err, hash){
     db.Users.create({
