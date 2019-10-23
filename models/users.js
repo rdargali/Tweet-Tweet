@@ -7,7 +7,8 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     profile_pic: DataTypes.STRING
   }, {});
-  Users.associate = function(models) {
+  Users.associate = function(models){
+   
   };
   return Users;
 };

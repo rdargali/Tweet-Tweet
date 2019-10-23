@@ -39,7 +39,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.set("view engine", "pug");
 
 app.get("/", (req, res) => {
-  res.render('index')
+  let data = {};
+  console.log(">>>>>>>>>>>")
+  data=db.content.findAll();
+  console.log(data.posting)
+  res.render("index", data);
 });
 
 app.get("/login", loginRedirect, (req, res) => {
@@ -105,6 +109,10 @@ app.post('/users', async (req, res)=>{
   });
 });
 
+app.get("/logout", function(req, res) {
+  req.session.destroy();
+  res.redirect("/");
+});
 app.listen(3000)
 
 
