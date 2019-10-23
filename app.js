@@ -84,17 +84,17 @@ app.post("/login", loginRedirect, function(req, res) {
 
 });
 app.get('/tweet', (req, res)=>{
-  db.Contents.find({}, (err, messages) =>{
-    res.send(messages)
+  db.contents.find({}, (err, posting) =>{
+    console.log(">>>>>")
+    res.send("/", posting)
   })
 })
 app.post('/tweet', (req, res)=>{
-  const message = new Contents(req.body);
-  message.save((err)=>{
-    if(err)
-    sendStatus(500);
-    res.sendStatus(200)
-  })
+ 
+  db.contents.create({
+    posting: res.body
+  }).then()
+ 
 })
 
 app.post('/users', async (req, res)=>{
