@@ -16,7 +16,23 @@ app.use(
     saveUninitialized: true
   })
 );
-
+function loginRedirect(req, res, next){
+  console.log(',.,.,.,.,.,.,.,.,.')
+  if (req.session.userId){
+    console.log("<<<<<<<<<<")
+    res.redirect("/account")
+  }else{
+    next();
+  }
+}
+function authenticate (req, res, next){
+  if (!req.session.userId){
+    console.log(">>>>>>>>>>")
+    res.redirect("/")
+  } else{
+    next();
+  }
+}
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -26,35 +42,35 @@ app.get("/", (req, res) => {
   res.render('index')
 });
 
-app.get("/login", (req, res) => {
-  res.render('index');
+app.get("/login", loginRedirect, (req, res) => {
+  res.render('/');
 });
 
 
-app.get("/account", (req, res) => {
+app.get("/account", authenticate, (req, res) => {
   res.render('account');
   
 });
 
-app.get("/register", (req, res) => {
+app.get("/register", loginRedirect, (req, res) => {
   res.render('register');
 });
 
-app.post("/login", function(req, res) {
+app.post("/login", loginRedirect, function(req, res) {
   db.Users.findOne({
     where:{
       email: req.body.email
     }
   }).then(function(user){
     if (!user){
-      res.redirect('/')
+    res.redirect('/')
     } else{
       bcrypt.compare(req.body.password, user.password, function(err, result){
-        if (result == true){
+        if (result){
+          req.session.userId = user.id
           res.redirect('/account');
         } else{
-          res.send("Invalid password");
-          res.redirect('/')
+          throw new Error ("Invalid username or password")
         }
       });
     }
