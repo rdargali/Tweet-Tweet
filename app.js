@@ -52,8 +52,9 @@ app.get("/login", loginRedirect, (req, res) => {
 
 
 app.get("/account", authenticate, (req, res) => {
+  console.log(">>>>>>>>>>")
   res.render('account');
-  
+  console.log("<<<<<<<<")
 });
 
 app.get("/register", loginRedirect, (req, res) => {
