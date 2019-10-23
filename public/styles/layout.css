@@ -62,3 +62,12 @@ a{
   margin-left:50px;
   text-align: center;
 }
+.tweet_form{  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20vh;
+  height: 200px;}.tweet_textarea {  border: 2px solid black;
+ }.tweet_button{
+  width: 60%;
+  margin-left: 20%;
+  margin-right: 20%}
