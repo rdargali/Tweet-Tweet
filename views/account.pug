@@ -6,6 +6,8 @@ block content
         .profile_container
                 h2 Your user profile
 append content
+
+
     body
         .tweet_form
             form.tweet_post(action='/tweet' method='POST')
@@ -13,3 +15,10 @@ append content
                 textarea(name='tweet' rows='5' cols='40' class='tweet_textarea' placeholder='Tweet tweet')
                 .tweet_button
                     input(type='submit' class='button tweet_button'  value="Tweet Tweet")
+        ul.nav
+            li.nav-item
+                a.nav-link(href="/account/dashboard") Dashboard
+            li.nav-item
+                a.nav-link(href="/account/settings") Settings
+            li.nav-item
+                a.nav-link(href="/account/logout") Logout
