@@ -1,25 +1,25 @@
 {
   "development": {
-    "username": "postgres",
-    "password": null,
-    "database": "twitter",
-    "host": "127.0.0.1",
+    "username": "jryulqlv",
+    "password": "cWgCI1evao3GTdChTOdGg--oMKXrEs3x",
+    "database": "jryulqlv",
+    "host": "salt.db.elephantsql.com",
     "dialect": "postgres"
     
   },
   "test": {
-    "username": "postgres",
-    "password": null,
-    "database": "twitter",
-    "host": "127.0.0.1",
+    "username": "jryulqlv",
+    "password": "cWgCI1evao3GTdChTOdGg--oMKXrEs3x",
+    "database": "jryulqlv",
+    "host": "postgres://jryulqlv:cWgCI1...@salt.db.elephantsql.com:5432/jryulqlv",
     "dialect": "postgres"
     
   },
   "production": {
-    "username": "postgres",
-    "password": null,
-    "database": "twitter",
-    "host": "127.0.0.1",
+    "username": "jryulqlv",
+    "password": "cWgCI1evao3GTdChTOdGg--oMKXrEs3x",
+    "database": "jryulqlv",
+    "host": "postgres://jryulqlv:cWgCI1...@salt.db.elephantsql.com:5432/jryulqlv",
     "dialect": "postgres"
     
   }

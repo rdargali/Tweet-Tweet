@@ -1,11 +1,13 @@
+const Sequelize =require ('sequelize');
 const express = require('express');
 const app = express();
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const accountRouter = require('./routes/accounts');
-const db = require('./models')
 const saltRounds = 10;
+const db = require('./models')
+
 
 app.use(
   session({
@@ -14,6 +16,7 @@ app.use(
     saveUninitialized: true
   })
 );
+
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -46,30 +49,40 @@ app.get("/register", (req, res) => {
   res.render('register');
 });
 
-app.post("/users", (req, res)=>{
-  // Once user is registered redirect user back to login page with message saying user registered successfully
-  res.render('index')
-});
-
 app.post("/login", function(req, res) {
-  console.log(req.body);
-  res.redirect("/login");
-});
-
-app.post('/users', function (req, res) {
-  bcrypt.hash(req.body, saltRounds, function (err, hash) {
- db.User.create({
-   email: req.body.email,
-   password: hash
-   }).then(function(data) {
-    console.log('heyyyy')
-    if (data) {
-    res.redirect('/index');
+  db.Users.findOne({
+    where:{
+      email: req.body.email
+    }
+  }).then(function(user){
+    if (!user){
+      res.redirect('/')
+    } else{
+      bcrypt.compare(req.body.password, user.password, function(err, result){
+        if (result == true){
+          res.redirect('/account');
+        } else{
+          res.send("Invalid password");
+          res.redirect('/')
+        }
+      });
     }
   });
- });
+
 });
 
+app.post('/users', async (req, res)=>{
+  bcrypt.hash(req.body.password, saltRounds, function (err, hash){
+    db.Users.create({
+      email: req.body.email,
+      password: hash
+    }).then(function(data){
+      if (data){
+        res.redirect('/');
+      }
+    });
+  });
+});
 
 app.listen(3000)
 
