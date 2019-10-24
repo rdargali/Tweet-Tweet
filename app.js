@@ -35,10 +35,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.set("view engine", "pug");
 
-app.get("/", (req, res) => {
+app.get("/", async(req, res) => {
   let data = {};
-  data=db.content.findAll();
-  console.log(data.posting)
+  data.jryulqlv= await db.content.findAll();
   res.render("index", data);
 });
 
@@ -48,7 +47,9 @@ app.get("/login", loginRedirect, (req, res) => {
 
 
 app.get("/account", authenticate, (req, res) => {
+  
   res.render('account');
+  
 });
 
 app.get("/register", loginRedirect, (req, res) => {
@@ -77,25 +78,45 @@ app.post("/login", loginRedirect, function(req, res) {
   });
 
 });
-app.get('/tweet', (req, res)=>{
-  db.contents.find({}, (err, posting) => {
-    res.send("/", posting)
-  })
+// app.get('/tweet', (req, res)=>{
+//   db.content.find( (err, content) =>{
+//     console.log(">>>>>")
+//     res.send(content)
+//   })
+// })
+app.get("/tweet", async (req, res) => {
+  try {
+    let data = {};
+    data.jryulqlv = await db.content.findAll();
+    res.render("/",data);
+  } catch (e) {
+    res.send(e);
+  }
 });
-
-app.post('/tweet', (req, res) => {
-  db.content.create({
-    posting: req.body,
-    createdAt: Date.now
-  })
-  
-  .then(function(data){
-    if (data) {
-      res.redirect('/account');
-    }
-  });
- 
-})
+// app.post('/tweet', (req, res)=>{
+//   req.db.contents.create({
+//     posting:req.body
+//   }).then()
+// });
+app.post("/tweet", async (req, res) => {
+  console.log("hi>>>>>>>>>>>>>>>>>>>>>>>>")
+//    db.contents.create({
+//     posting:req.body
+    
+//   })
+//   .then(function(data){
+//     if (data){
+//       res.redirect('/account');
+//     }
+// });
+db.content.create({
+  posting:req.body.tweet
+}).then(function(data){
+  if (data){
+    res.redirect('/account');
+  }
+});
+});
 
 app.post('/users', async (req, res)=>{
   bcrypt.hash(req.body.password, saltRounds, function (err, hash){
