@@ -17,9 +17,7 @@ app.use(
   })
 );
 function loginRedirect(req, res, next){
-  console.log(',.,.,.,.,.,.,.,.,.')
   if (req.session.userId){
-    console.log("<<<<<<<<<<")
     res.redirect("/account")
   }else{
     next();
@@ -27,7 +25,6 @@ function loginRedirect(req, res, next){
 }
 function authenticate (req, res, next){
   if (!req.session.userId){
-    console.log(">>>>>>>>>>")
     res.redirect("/")
   } else{
     next();
@@ -40,7 +37,6 @@ app.set("view engine", "pug");
 
 app.get("/", (req, res) => {
   let data = {};
-  console.log(">>>>>>>>>>>")
   data=db.content.findAll();
   console.log(data.posting)
   res.render("index", data);
@@ -52,9 +48,7 @@ app.get("/login", loginRedirect, (req, res) => {
 
 
 app.get("/account", authenticate, (req, res) => {
-  console.log(">>>>>>>>>>")
   res.render('account');
-  console.log("<<<<<<<<")
 });
 
 app.get("/register", loginRedirect, (req, res) => {
@@ -84,22 +78,28 @@ app.post("/login", loginRedirect, function(req, res) {
 
 });
 app.get('/tweet', (req, res)=>{
-  db.contents.find({}, (err, posting) =>{
-    console.log(">>>>>")
+  db.contents.find({}, (err, posting) => {
     res.send("/", posting)
   })
-})
-app.post('/tweet', (req, res)=>{
- 
-  db.contents.create({
-    posting: res.body
-  }).then()
+});
+
+app.post('/tweet', (req, res) => {
+  db.content.create({
+    posting: req.body,
+    createdAt: Date.now
+  })
+  
+  .then(function(data){
+    if (data) {
+      res.redirect('/account');
+    }
+  });
  
 })
 
 app.post('/users', async (req, res)=>{
   bcrypt.hash(req.body.password, saltRounds, function (err, hash){
-    db.Users.create({
+    db.users.create({
       email: req.body.email,
       password: hash
     }).then(function(data){
@@ -114,6 +114,9 @@ app.get("/logout", function(req, res) {
   req.session.destroy();
   res.redirect("/");
 });
+
+
+
 app.listen(3000)
 
 
