@@ -1,10 +1,9 @@
 extends layout
 include mixins/tweetForm
 block content
-        h1= message
-        .single_wrap
-                h4 This is where all the users tweets will go
-                //- if user
-                //-         //- Show form for user to input text
-                //- 
-                //-       //-  Show all tweets
+        h1 Anime Index
+                ul
+                        each cat in jryulqlv
+                                li
+                                        - var catUrl =  cat.id
+                                        h4= cat.posting
