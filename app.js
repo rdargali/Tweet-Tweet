@@ -120,7 +120,7 @@ db.content.create({
 
 app.post('/users', async (req, res)=>{
   bcrypt.hash(req.body.password, saltRounds, function (err, hash){
-    db.users.create({
+    db.Users.create({
       email: req.body.email,
       password: hash
     }).then(function(data){

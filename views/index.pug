@@ -1,9 +1,12 @@
 extends layout
 include mixins/tweetForm
-block content
-        h1 Anime Index
-                ul
-                        each cat in jryulqlv
-                                li
-                                        - var catUrl =  cat.id
-                                        h4= cat.posting
+
+append content
+        h1.newsfeed Who's tweeting around the world
+                .card
+                        ul.list-group
+                                each cat in jryulqlv
+                                        li.list-group-item 
+                                                - var catUrl =  cat.id
+                                                h4= cat.posting
+
