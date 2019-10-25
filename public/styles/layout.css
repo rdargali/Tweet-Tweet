@@ -66,6 +66,7 @@ a{
 #logo{
   display: flex;
   justify-content: left;
+  
 }
 .logout{
   margin-left:50px;
@@ -79,7 +80,7 @@ a{
 
 }
 
-.tweet_form{  display: flex;
+.tweet_form {  display: flex;
   flex-direction: row;
   justify-content: center;
   margin-top: 40vh;
