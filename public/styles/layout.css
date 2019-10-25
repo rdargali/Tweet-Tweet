@@ -45,7 +45,7 @@ a{
 
 .footer{
   text-align: center;
-  bottom: 0v;
+  bottom: 0;
 }
 .single_wrap{
   background-color: whitesmoke;
@@ -57,6 +57,7 @@ a{
 #logo{
   display: flex;
   justify-content: left;
+  
 }
 .logout{
   margin-left:50px;
@@ -68,21 +69,34 @@ a{
   margin-right: 8px;
 }
 
-.tweet_form{  display: flex;
+.tweet_form {  display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-top: 20vh;
-  height: 200px;}
+  margin-top: 40vh;
+  height: 400px;
+}
+
+.tweetwidth{
+  width: 50vh;
+  height: 35vh;
+}
   
-.tweet_textarea {
-      border: 2px solid black;
+.tweet_box {
+  width: 100%;
+  height: 85px;
+  border-radius: 3px;
+  align-content: inherit;
+
+  
  }
  
  .tweet_button{
-  width: 60%;
-  margin-left: 20%;
-  margin-right: 20%}
-.register{
+  width: 100%;
+  align-content: center;
+
+ }
+
+.register {
   padding:0 0 0 5px;
 }
 
