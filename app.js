@@ -8,14 +8,26 @@ const accountRouter = require('./routes/accounts');
 const saltRounds = 10;
 const db = require('./models')
 
-// db.Users.create({
-//   email:"stevelp@yahoo.com",
-//   password:"456"
-// }).then(Users =>{
-//   Users.createContent({
-//     posting:"hello world"
-//   })
-// });
+db.Users.create({
+  email:"st@yahoo.com",
+  password:"123"
+}).then(Users =>{
+  Users.createContent({
+    posting:"hello world"
+  })
+});
+db.Users.create({
+  email:"sextbeast@yahoo.com",
+  password:"123"
+}).then(Users =>{
+  Users.createContent({
+    posting:"Hey Digital Crafts!!"
+  })
+});
+
+
+
+
 
 
 app.use(
