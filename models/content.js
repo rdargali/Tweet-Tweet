@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     posting: DataTypes.TEXT
   }, {});
   content.associate = function(models) {
-    
+    models.content.belongsTo(models.Users, { foreignKey: 'UserId' });
   };
   return content;
 };

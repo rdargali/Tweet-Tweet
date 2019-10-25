@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     profile_pic: DataTypes.STRING
   }, {});
   Users.associate = function(models){
-   
+    models.Users.hasMany(models.content);
   };
   return Users;
 }; 

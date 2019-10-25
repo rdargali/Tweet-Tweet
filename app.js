@@ -9,6 +9,27 @@ const accountRouter = require('./routes/accounts');
 const saltRounds = 10;
 const db = require('./models')
 
+db.Users.create({
+  email:"st@yahoo.com",
+  password:"123"
+}).then(Users =>{
+  Users.createContent({
+    posting:"hello world"
+  })
+});
+db.Users.create({
+  email:"sextbeast@yahoo.com",
+  password:"123"
+}).then(Users =>{
+  Users.createContent({
+    posting:"Hey Digital Crafts!!"
+  })
+});
+
+
+
+
+
 
 app.use(
   session({
@@ -85,31 +106,39 @@ app.post("/login", loginRedirect, function(req, res) {
 //     res.send(content)
 //   })
 // })
-app.get("/tweet", async (req, res) => {
-  try {
-    let data = {};
-    data.jryulqlv = await db.content.findAll();
-    res.render("/",data);
-  } catch (e) {
-    res.send(e);
-  }
+
+
+// app.get("/tweet", async (req, res) => {
+//   try {
+//     let data = {};
+//     data.jryulqlv = await db.content.findAll();
+//     res.render("/",data);
+//   } catch (e) {
+//     res.send(e);
+//   }
+// });
+
+app.get('/',(req,res)=>{
+  db.Users.findAll({
+    include:[content]
+  }).then(Users=>{
+    res.render('index',{Users:Users})
+  });
 });
-// app.post('/tweet', (req, res)=>{
-//   req.db.contents.create({
-//     posting:req.body
-//   }).then()
-// });
+
+app.post('Users',(req,res)=>{
+  db.Users.create(req.body)
+  .then(()=> res('/'));
+});
+app.post('/tweet/:UserId',(req,res)=>{
+  console.log(req.body)
+  db.content.create({...req.body,UserId:req.params.User_id})
+  .then(()=> res.redirect('/'));
+});
+
+
+
 app.post("/tweet", async (req, res) => {
-  console.log("hi>>>>>>>>>>>>>>>>>>>>>>>>")
-//    db.contents.create({
-//     posting:req.body
-    
-//   })
-//   .then(function(data){
-//     if (data){
-//       res.redirect('/account');
-//     }
-// });
 db.content.create({
   posting:req.body.tweet
 }).then(function(data){
@@ -118,6 +147,9 @@ db.content.create({
   }
 });
 });
+
+
+
 
 app.post('/users', async (req, res)=>{
   bcrypt.hash(req.body.password, saltRounds, function (err, hash){
