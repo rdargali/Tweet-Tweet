@@ -61,16 +61,54 @@ a{
 .logout{
   margin-left:50px;
   text-align: center;
+  margin-right: 8px;
 }
+
+.register{
+  margin-right: 8px;
+}
+
 .tweet_form{  display: flex;
   flex-direction: row;
   justify-content: center;
   margin-top: 20vh;
-  height: 200px;}.tweet_textarea {  border: 2px solid black;
- }.tweet_button{
+  height: 200px;}
+  
+.tweet_textarea {
+      border: 2px solid black;
+ }
+ 
+ .tweet_button{
   width: 60%;
   margin-left: 20%;
   margin-right: 20%}
 .register{
   padding:0 0 0 5px;
 }
+
+.newsfeed 
+{
+  padding: 10px;
+  margin-top: 130px;
+  text-align: center;
+
+  
+}
+
+.card {
+  margin-top: 10px;
+  position: relative;
+  text-align: center;
+  width: 25rem;
+  left: 35%;
+  border-radius: 10px;
+  padding: 20px;
+  z-index: -1;
+  
+
+}
+ .list-group-item  {
+  text-align: center;
+  background-color: #00abee7c;
+ 
+ }

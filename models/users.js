@@ -11,4 +11,8 @@ module.exports = (sequelize, DataTypes) => {
    
   };
   return Users;
+<<<<<<< HEAD
 };
+=======
+}; 
+>>>>>>> 0c548c8053c47cf87e397271384114113afdf724
