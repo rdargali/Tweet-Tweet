@@ -8,6 +8,15 @@ const accountRouter = require('./routes/accounts');
 const saltRounds = 10;
 const db = require('./models')
 
+// db.Users.create({
+//   email:"stevelp@yahoo.com",
+//   password:"456"
+// }).then(Users =>{
+//   Users.createContent({
+//     posting:"hello world"
+//   })
+// });
+
 
 app.use(
   session({
@@ -87,15 +96,26 @@ app.post("/login", loginRedirect, function(req, res) {
 //     res.send(content)
 //   })
 // })
-app.get("/tweet", async (req, res) => {
-  try {
-    let data = {};
-    data.jryulqlv = await db.content.findAll();
-    res.render("/",data);
-  } catch (e) {
-    res.send(e);
-  }
+
+
+// app.get("/tweet", async (req, res) => {
+//   try {
+//     let data = {};
+//     data.jryulqlv = await db.content.findAll();
+//     res.render("/",data);
+//   } catch (e) {
+//     res.send(e);
+//   }
+// });
+
+app.get('/',(req,res)=>{
+  db.Users.findAll({
+    include:[content]
+  }).then(Users=>{
+    res.render('index',{Users:Users});
+  });
 });
+
 // app.post('/tweet', (req, res)=>{
 //   req.db.contents.create({
 //     posting:req.body
