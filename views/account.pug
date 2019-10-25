@@ -1,11 +1,8 @@
 extends layout
 //- include mixins/tweetForm
 
-block content 
-    Head
-        .profile_container
-                h2 Your user profile
-append content
+block content
+
     body
         .tweet_form
                 form(method="POST" action="/tweet")
