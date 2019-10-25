@@ -1,23 +1,30 @@
 *{
   box-sizing: border-box;
   margin: 0;
+  
 }
 body{
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Kreon', serif; 
   font-size: 20px;
-  background-color: #00acee;
+  background-image: linear-gradient(to bottom, rgb(208, 236, 250), rgb(0, 91, 119));
+  height: 100vh; 
+  background-attachment: fixed;
+  text-shadow: 1px 1px 2px #000000;
+  color: rgb(134, 215, 255);
+
 }
+
 .header{
   max-height: 110px;
   width: 100%;
-  background-color: #dceff7;
+  background-image: linear-gradient(to top, rgb(208, 236, 250));
   position: fixed;
   top: 0;
-  
-
+  color: white;
 }
+
 a{
-  color: black;
+  color: white;
 }
 
 .wrapper{
@@ -31,7 +38,6 @@ a{
   max-width: 100%;
   margin: 0 auto;
   background-color:rgb(5, 75, 122) ;
-  
 }
 .label{
   font: white;
@@ -41,18 +47,21 @@ a{
   display: flex;
   justify-content: flex-end;
   padding: 30px;
+  
 }
 
 .footer{
   text-align: center;
-  bottom: 0v;
+  bottom: 0;
+  color: white;
+
 }
 .single_wrap{
   background-color: whitesmoke;
   width: 700px;
   height:700px;
   padding: 150px;
-  
+
 }
 #logo{
   display: flex;
@@ -62,28 +71,37 @@ a{
   margin-left:50px;
   text-align: center;
   margin-right: 8px;
+  
 }
 
 .register{
   margin-right: 8px;
+
 }
 
 .tweet_form{  display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-top: 20vh;
-  height: 200px;}
-  
+  margin-top: 40vh;
+  height: 200px;
+  color: white;
+
+}
+
 .tweet_textarea {
       border: 2px solid black;
+          
  }
  
  .tweet_button{
   width: 60%;
   margin-left: 20%;
-  margin-right: 20%}
+  margin-right: 20%
+}
+
 .register{
   padding:0 0 0 5px;
+  
 }
 
 .newsfeed 
@@ -91,8 +109,7 @@ a{
   padding: 10px;
   margin-top: 130px;
   text-align: center;
-
-  
+  color: white;
 }
 
 .card {
@@ -102,13 +119,11 @@ a{
   width: 25rem;
   left: 35%;
   border-radius: 10px;
-  padding: 20px;
+  padding: 15px;
   z-index: -1;
   
-
 }
  .list-group-item  {
   text-align: center;
-  background-color: #00abee7c;
- 
+  background-color: rgb(77, 186, 219);
  }
