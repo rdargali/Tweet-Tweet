@@ -1,3 +1,4 @@
+require('dotenv').config()
 const Sequelize =require ('sequelize');
 const express = require('express');
 const app = express();
@@ -17,9 +18,7 @@ app.use(
   })
 );
 function loginRedirect(req, res, next){
-  console.log(',.,.,.,.,.,.,.,.,.')
   if (req.session.userId){
-    console.log("<<<<<<<<<<")
     res.redirect("/account")
   }else{
     next();
@@ -27,7 +26,6 @@ function loginRedirect(req, res, next){
 }
 function authenticate (req, res, next){
   if (!req.session.userId){
-    console.log(">>>>>>>>>>")
     res.redirect("/")
   } else{
     next();
@@ -138,6 +136,11 @@ app.get("/logout", function(req, res) {
   req.session.destroy();
   res.redirect("/");
 });
-app.listen(3000)
+
+
+
+app.listen(process.env.PORT, () => {
+  console.log('App running on port ' + process.env.PORT)
+})
 
 
