@@ -1,12 +1,15 @@
 extends layout
-//- include mixins/tweetForm
+
 
 block content
 
-    body
         .tweet_form
                 form(method="POST" action="/tweet")
-                    .form-group
-                        label(for='tweet') tweet
-                        input#email.form-control(name="tweet" type="text" aria-describedby='emailHelp' placeholder='Enter tweet')   
-                        input(type='submit' class='button tweet_button'  value="Tweet Tweet")
+                    label(for='tweet' class='tweetwidth')
+                        
+                            textarea(name="tweet" type="text" class='tweet_box' placeholder='Share your thoughts')
+                            br
+                            button(type='submit' class='tweet_button'  value="Tweet Tweet") Tweet Tweet
+                            
+
+
