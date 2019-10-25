@@ -112,26 +112,23 @@ app.get('/',(req,res)=>{
   db.Users.findAll({
     include:[content]
   }).then(Users=>{
-    res.render('index',{Users:Users});
+    res.render('index',{Users:Users})
   });
 });
 
-// app.post('/tweet', (req, res)=>{
-//   req.db.contents.create({
-//     posting:req.body
-//   }).then()
-// });
+app.post('Users',(req,res)=>{
+  db.Users.create(req.body)
+  .then(()=> res('/'));
+});
+app.post('/tweet/:UserId',(req,res)=>{
+  console.log(req.body)
+  db.content.create({...req.body,UserId:req.params.User_id})
+  .then(()=> res.redirect('/'));
+});
+
+
+
 app.post("/tweet", async (req, res) => {
-  console.log("hi>>>>>>>>>>>>>>>>>>>>>>>>")
-//    db.contents.create({
-//     posting:req.body
-    
-//   })
-//   .then(function(data){
-//     if (data){
-//       res.redirect('/account');
-//     }
-// });
 db.content.create({
   posting:req.body.tweet
 }).then(function(data){
@@ -140,6 +137,9 @@ db.content.create({
   }
 });
 });
+
+
+
 
 app.post('/users', async (req, res)=>{
   bcrypt.hash(req.body.password, saltRounds, function (err, hash){
