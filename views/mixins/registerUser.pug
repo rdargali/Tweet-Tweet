@@ -1,12 +1,12 @@
 mixin registerUser()
-    h1 Create your account
+    h1 Create Your Account
     hr
     form(method="POST" action="/users")
         .form-group
-            label(for='email') Email address
+            label(for='email') E m a i l 
             input#email.form-control(name="email" type="email" aria-describedby='emailHelp' placeholder='Enter email')   
         .form-group
-            label(for='password') Password
+            label(for='password') P a s s w o r d
             input#password.form-control(name="password" type='password' placeholder='Enter password')
         button.btn.btn-primary(type='submit') Register  
           

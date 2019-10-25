@@ -11,4 +11,4 @@ module.exports = (sequelize, DataTypes) => {
     models.Users.hasMany(models.content);
   };
   return Users;
-}; 
+};
