@@ -1,3 +1,4 @@
+require('dotenv').config()
 const Sequelize =require ('sequelize');
 const express = require('express');
 const app = express();
@@ -138,6 +139,8 @@ app.get("/logout", function(req, res) {
 
 
 
-app.listen(3000)
+app.listen(process.env.PORT, () => {
+  console.log('App running on port ' + process.env.PORT)
+})
 
 
