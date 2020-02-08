@@ -21,9 +21,12 @@ Users are then taken back to the homescreen where they are able to now login.
 
 Once logged in, users are taken to the page shown below in order to write their tweet.
 
-<img width="1007" alt="Screen Shot 2020-02-08 at 3 26 34 PM" src="https://user-images.githubusercontent.com/54610365/74092289-68f2bb80-4a87-11ea-95d6-26900f941fb6.png">
+<img width="1040" alt="Screen Shot 2020-02-08 at 3 28 13 PM" src="https://user-images.githubusercontent.com/54610365/74092317-a7887600-4a87-11ea-9be6-0e33eed63c95.png">
 
 
 The tweet is then put at the bottom of the discussion board at the homescreen.
+
+<img width="1040" alt="Screen Shot 2020-02-08 at 3 28 21 PM" src="https://user-images.githubusercontent.com/54610365/74092322-b2dba180-4a87-11ea-8ee4-e4ec588a0fda.png">
+
 
 Hope you guys enjoy using this application!
