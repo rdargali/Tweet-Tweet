@@ -1,35 +1,13 @@
-require('dotenv').config()
-const Sequelize =require ('sequelize');
-const express = require('express');
+require("dotenv").config();
+const Sequelize = require("sequelize");
+const express = require("express");
 const app = express();
-const session = require('express-session');
-const bcrypt = require('bcrypt');
-const bodyParser = require('body-parser');
-const accountRouter = require('./routes/accounts');
+const session = require("express-session");
+const bcrypt = require("bcrypt");
+const bodyParser = require("body-parser");
+const accountRouter = require("./routes/accounts");
 const saltRounds = 10;
-const db = require('./models')
-
-db.Users.create({
-  email:"st@yahoo.com",
-  password:"123"
-}).then(Users =>{
-  Users.createContent({
-    posting:"hello world"
-  })
-});
-db.Users.create({
-  email:"sextbeast@yahoo.com",
-  password:"123"
-}).then(Users =>{
-  Users.createContent({
-    posting:"Hey Digital Crafts!!"
-  })
-});
-
-
-
-
-
+const db = require("./models");
 
 app.use(
   session({
@@ -38,17 +16,17 @@ app.use(
     saveUninitialized: true
   })
 );
-function loginRedirect(req, res, next){
-  if (req.session.userId){
-    res.redirect("/account")
-  }else{
+function loginRedirect(req, res, next) {
+  if (req.session.userId) {
+    res.redirect("/account");
+  } else {
     next();
   }
 }
-function authenticate (req, res, next){
-  if (!req.session.userId){
-    res.redirect("/")
-  } else{
+function authenticate(req, res, next) {
+  if (!req.session.userId) {
+    res.redirect("/");
+  } else {
     next();
   }
 }
@@ -57,48 +35,43 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.set("view engine", "pug");
 
-app.get("/", async(req, res) => {
+app.get("/", async (req, res) => {
   let data = {};
-  data.jryulqlv= await db.content.findAll();
+  data.jryulqlv = await db.content.findAll();
   res.render("index", data);
 });
 
 app.get("/login", loginRedirect, (req, res) => {
-  res.render('/');
+  res.render("/");
 });
 
-
 app.get("/account", authenticate, (req, res) => {
-  
-  res.render('account');
-  
+  res.render("account");
 });
 
 app.get("/register", loginRedirect, (req, res) => {
-  res.render('register');
+  res.render("register");
 });
 
 app.post("/login", loginRedirect, function(req, res) {
   db.Users.findOne({
-    where:{
+    where: {
       email: req.body.email
     }
-  }).then(function(user){
-    if (!user){
-    res.redirect('/')
-    } else{
-      bcrypt.compare(req.body.password, user.password, function(err, result){
-        if (result){
-          req.session.userId = user.id
-          res.redirect('/account');
-        } else{
-           return res.status(500).send('Invalid username or password');
-       
+  }).then(function(user) {
+    if (!user) {
+      res.redirect("/");
+    } else {
+      bcrypt.compare(req.body.password, user.password, function(err, result) {
+        if (result) {
+          req.session.userId = user.id;
+          res.redirect("/account");
+        } else {
+          return res.status(500).send("Invalid username or password");
         }
       });
     }
   });
-
 });
 // app.get('/tweet', (req, res)=>{
 //   db.content.find( (err, content) =>{
@@ -106,7 +79,6 @@ app.post("/login", loginRedirect, function(req, res) {
 //     res.send(content)
 //   })
 // })
-
 
 // app.get("/tweet", async (req, res) => {
 //   try {
@@ -118,47 +90,44 @@ app.post("/login", loginRedirect, function(req, res) {
 //   }
 // });
 
-app.get('/',(req,res)=>{
+app.get("/", (req, res) => {
   db.Users.findAll({
-    include:[content]
-  }).then(Users=>{
-    res.render('index',{Users:Users})
+    include: [content]
+  }).then(Users => {
+    res.render("index", { Users: Users });
   });
 });
 
-app.post('Users',(req,res)=>{
-  db.Users.create(req.body)
-  .then(()=> res('/'));
+app.post("Users", (req, res) => {
+  db.Users.create(req.body).then(() => res("/"));
 });
-app.post('/tweet/:UserId',(req,res)=>{
-  console.log(req.body)
-  db.content.create({...req.body,UserId:req.params.User_id})
-  .then(()=> res.redirect('/'));
+app.post("/tweet/:UserId", (req, res) => {
+  console.log(req.body);
+  db.content
+    .create({ ...req.body, UserId: req.params.User_id })
+    .then(() => res.redirect("/"));
 });
-
-
 
 app.post("/tweet", async (req, res) => {
-db.content.create({
-  posting:req.body.tweet
-}).then(function(data){
-  if (data){
-    res.redirect('/account');
-  }
+  db.content
+    .create({
+      posting: req.body.tweet
+    })
+    .then(function(data) {
+      if (data) {
+        res.redirect("/account");
+      }
+    });
 });
-});
 
-
-
-
-app.post('/users', async (req, res)=>{
-  bcrypt.hash(req.body.password, saltRounds, function (err, hash){
+app.post("/users", async (req, res) => {
+  bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
     db.Users.create({
       email: req.body.email,
       password: hash
-    }).then(function(data){
-      if (data){
-        res.redirect('/');
+    }).then(function(data) {
+      if (data) {
+        res.redirect("/");
       }
     });
   });
@@ -169,10 +138,6 @@ app.get("/logout", function(req, res) {
   res.redirect("/");
 });
 
-
-
 app.listen(process.env.PORT, () => {
-  console.log('App running on port ' + process.env.PORT)
-})
-
-
+  console.log("App running on port " + process.env.PORT);
+});
